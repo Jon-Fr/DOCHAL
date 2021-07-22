@@ -21,43 +21,43 @@ output_path = readline(prompt = "Enter the output path (use / instead of \\): ")
 # set wd
 setwd(wd)
 # name of the plot boundaries files
-plot_boundaries_name = readline(prompt = "Enter the name of the plot boundaries files: ")
+plot_boundaries_name = readline(prompt = "Enter the name of the plot boundary shapefile (without file extension): ")
 # DTM or point cloud
-input_type_DTM =  readline(prompt = "If you already have a DTM of the AOI enter D, if you have a point cloud enter p: ")
+input_type_DTM =  readline(prompt = "If you already have a DTM of the AOI enter d, if you have a point cloud enter p: ")
 # name of the DTM or point cloud + desired resolution
-if (input_type_DTM == "D"){
+if (input_type_DTM == "d"){
   DTM_name = readline(prompt = "Enter the name of the DTM (including the file extension): ")
 }
 if (input_type_DTM == "p"){
   DTM_points_name = readline(prompt = "Enter the name of the point cloud for the DTM (including the file extension): ")
   res_DTM = readline(prompt = "Enter the desired resolution for the DTM (in m): ")
   res_DTM = as.double(res_DTM)
-  save_con_DTM = readline(prompt = "Should the generated DTM be saved (y/n)? ")
+  save_con_DTM = readline(prompt = "Save generated DTM (y/n)? ")
   if (save_con_DTM == "n"){
     save_con_DTM = FALSE
   } else{
     save_con_DTM = TRUE
   }
-  clipping = readline(prompt = "Do you have a shapfile to clip the point cloud? If yes enter the name of the file, if no enter n: ")
+  clipping = readline(prompt = "Do you have a shapfile to clip the point cloud? If yes enter the name of the file (without file extension), if no enter n: ")
 }
 # DSM or point cloud
-input_type_DSM =  readline(prompt = "If you already have a DSM of the AOI enter D, if you have a point cloud enter p: ")
+input_type_DSM =  readline(prompt = "If you already have a DSM of the AOI enter d, if you have a point cloud enter p: ")
 # name of the DSM or point cloud + desired resolution
-if (input_type_DSM == "D"){
+if (input_type_DSM == "d"){
   DSM_name = readline(prompt = "Enter the name of the DSM (including the file extension): ")
 }
 if (input_type_DSM == "p"){
   DSM_points_name = readline(prompt = "Enter the name of the point cloud for the DSM (including the file extension): ")
   res_DSM = readline(prompt = "Enter the desired resolution for the DSM (in m): ")
   res_DSM = as.double(res_DSM)
-  save_con_DSM = readline(prompt = "Should the generated DSM be saved (y/n)? ")
+  save_con_DSM = readline(prompt = "Save generated DSM (y/n)? ")
   if (save_con_DSM == "n"){
     save_con_DSM = FALSE
   } else{
     save_con_DSM = TRUE
   }
   if (clipping == " "){
-    clipping = readline(prompt = "Do you have a shapfile to clip the point cloud? If yes enter the name of the file, if no enter n: ")
+    clipping = readline(prompt = "Do you have a shapfile to clip the point cloud? If yes, enter the name of the file (without file extension), if no, enter n: ")
   }
 }
 # buffer size
@@ -71,13 +71,13 @@ if (buffer_setting == "n"){
 ## import data ##
 
 # import/read DTM and or DSM if existing
-if (input_type_DTM == "D"){
+if (input_type_DTM == "d"){
   DTM = raster(DTM_name)
   dot_pos = regexpr("\\.[^\\.]*$", DTM_name)
   DTM_name = substr(DTM_name, 1, dot_pos-1)
 }
 
-if (input_type_DSM == "D"){
+if (input_type_DSM == "d"){
   DSM = raster(DSM_name)
   dot_pos = regexpr("\\.[^\\.]*$", DSM_name)
   DSM_name = substr(DSM_name, 1, dot_pos-1)
@@ -484,7 +484,6 @@ extracted_heights$Median_height = extracted_heights$Median_height * 100
 extracted_heights$SD_height = extracted_heights$SD_height * 100
 extracted_heights$MAD_height = extracted_heights$MAD_height * 100
 extracted_heights$percentile.90. = extracted_heights$percentile.90. * 100
-print(extracted_heights)
 
 # merge height values with lodging values in final table
 colnames(extracted_heights)[2] = "Plot"
@@ -510,3 +509,6 @@ writeOGR(plot_boundaries, "Plot Boundaries with extracted values", layer = "plot
 # export extracted values as xlsx
 height_table_name = paste(DSM_name, "_Extracted_Values.xlsx", sep="")
 write.xlsx(extracted_values, height_table_name, overwrite=TRUE)
+print(extracted_values)
+
+print("Finished processing without errors")
