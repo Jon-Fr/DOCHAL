@@ -172,8 +172,10 @@ wd = output_path
 setwd(wd)
 
 # create DTM and DSM raster from point cloud
-if (input_type_DTM == "p" & input_type_DSM == "p"){
+if (input_type_DTM == "p"){
   DTM = las_to_dtm(DTM_points, res_DTM, save_con_DTM, clip_file, DTM_name)
+}
+if (input_type_DSM == "p"){
   DSM = las_to_dsm(DSM_points, res_DSM, DTM_z_min, DTM_z_max, save_con_DTM, clip_file, DSM_name)
 }
 
