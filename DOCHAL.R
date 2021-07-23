@@ -63,7 +63,7 @@ if (input_type_DSM == "p"){
 # buffer size
 buffer_setting = readline(prompt = "Set plot buffer width automatically (y/n)? ")
 if (buffer_setting == "n"){
-  buffer_width = readline(prompt = "Enter buffer width (in Meters): ")
+  buffer_width = readline(prompt = "Enter buffer width (in m): ")
 }
 
 
