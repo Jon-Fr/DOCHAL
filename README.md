@@ -3,7 +3,6 @@
 This is an R script that can be used to derive crop heights and lodging areas from point clouds or digital elevation models.
 &nbsp;
 
-
 Required input datasets are:
 * terrain height information (as point cloud (.laz) or DTM (.tif))
 * crop surface information (as point cloud ((.laz) or DSM (.tif))
