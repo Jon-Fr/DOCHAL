@@ -3,8 +3,8 @@
 This is an R script that can be used to derive crop heights and lodging areas from point clouds or digital elevation models.
 
 Required input datasets are:
-* terrain height information (as point cloud or DTM)
-* crop surface information (as point cloud or DSM)
+* terrain height information (as point cloud (.laz) or DTM (.tif))
+* crop surface information (as point cloud ((.laz) or DSM (.tif))
 * Shapefile with plot boundaries
 * (optional) Shapefile with region of interest 
 
@@ -34,3 +34,13 @@ The meaning of the columns in the output table is as follows:
 | lower | height threshold between the classes "most likely lodging" and "probably lodging"|
 | upper | height threshold between the classes "probably not lodging" and "most likely not lodging"|
 | min_angle | minimum lodging angle that leads to classification as lodging|
+
+
+The lodging/no-lodging classes are represented by the following values in the output classification raster:
+
+| Class        | Raster value           | 
+| ------------- |:-------------:| 
+| most likely lodging | 1        | 
+| probably lodging | 2    |  
+| probably not lodging | 3      |   
+| most likely not lodging | 4 |
