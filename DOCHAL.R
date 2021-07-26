@@ -346,10 +346,10 @@ for (i in 1:nrow(l_pp)){
 l_pp = l_pp[, c(1, ncol(l_pp), ncol(l_pp)-1, 4:ncol(l_pp)-2)]
 
 # change column names
-colnames(l_pp)[4] = "most likely lodging"
-colnames(l_pp)[5] = "probably lodging"
-colnames(l_pp)[6] = "probably not lodging"
-colnames(l_pp)[7] = "most likely not lodging"
+colnames(l_pp)[4] = "most_likely_lodging_%"
+colnames(l_pp)[5] = "probably_lodging_%"
+colnames(l_pp)[6] = "probably_not_lodging_%"
+colnames(l_pp)[7] = "most_likely_not_lodging_%"
 
 # calculate class % per plot
 for (i in 4:ncol(l_pp)){
@@ -357,7 +357,7 @@ for (i in 4:ncol(l_pp)){
 }
 
 # calculate class % for the whole CHM
-class_df = data.frame(class = c("most likely lodging", "probably lodging", "probably not lodging", "most likely not lodging"))
+class_df = data.frame(class = c("most_likely_lodging_%", "probably_lodging_%", "probably_not_lodging_%", "most_likely_not_lodging_%"))
 n_raster_cells = sum(l_pp$`number of raster cells`)
 for (i in 1:4){
   class_df[i, "%"] = round(sum(l_pp[1:nrow(l_pp), i+3]) / n_raster_cells * 100, digits = 2)
@@ -472,8 +472,8 @@ masked_clipped_CHM = overlay(clipped_CHM, CHM_classified, fun = function(x,y){
 })
 
 # extract height values from CHM for each plot
-extract_function = function(x, na.rm) c(Mean_height = mean(x, na.rm=TRUE), 
-                                        Median_height = median(x, na.rm=TRUE), 
+extract_function = function(x, na.rm) c(mean_height = mean(x, na.rm=TRUE), 
+                                        median_height = median(x, na.rm=TRUE), 
                                         SD_height = sd(x, na.rm=TRUE), 
                                         MAD_height = mad(x, na.rm=TRUE), 
                                         percentile = quantile(x, .9, na.rm=TRUE))
@@ -486,8 +486,8 @@ extracted_heights = data.frame(id=buffered_plots$id, extracted_heights)
 extracted_heights = as.data.frame(merge(buffered_plots, extracted_heights, by="id"))
 
 # convert height values to cm and print them
-extracted_heights$Mean_height = extracted_heights$Mean_height * 100
-extracted_heights$Median_height = extracted_heights$Median_height * 100
+extracted_heights$mean_height = extracted_heights$mean_height * 100
+extracted_heights$median_height = extracted_heights$median_height * 100
 extracted_heights$SD_height = extracted_heights$SD_height * 100
 extracted_heights$MAD_height = extracted_heights$MAD_height * 100
 extracted_heights$percentile.90. = extracted_heights$percentile.90. * 100
@@ -495,8 +495,8 @@ extracted_heights$percentile.90. = extracted_heights$percentile.90. * 100
 # merge height values with lodging values in final table
 colnames(extracted_heights)[2] = "Plot"
 colnames(height_information)[2] = "Plot"
-extracted_values_temp = merge(extracted_heights[,c("id", "Plot", "Mean_height", "Median_height", "SD_height", "MAD_height", "percentile.90.")],
-                              l_pp[, c("Plot", "most likely lodging %", "probably lodging %", "probably not lodging %", "most likely not lodging %")],
+extracted_values_temp = merge(extracted_heights[,c("id", "Plot", "mean_height", "median_height", "SD_height", "MAD_height", "percentile.90.")],
+                              l_pp[, c("Plot", "most_likely_lodging_%", "probably_lodging_%", "probably_not_lodging_%", "most_likely_not_lodging_%")],
                               by = "Plot", all.x=TRUE)
 extracted_values = merge(extracted_values_temp, height_information[, c("Plot", "threshold", "lower", "upper", "min_angle")],
                          by = "Plot", all.x=TRUE)
