@@ -1,6 +1,15 @@
 ### Script for extracting vegetation heights and lodging areas from 3D point clouds or digital elevation models ###
 ###################################################################################################################
 
+# list required packages
+packages = list("raster", "rgdal", "rgeos", "lidR", "openxlsx")
+
+# compile list of uninstalled packages and install them
+new.packages = packages[!(packages %in% installed.packages()[,"Package"])]
+if (length(new.packages) > 0) {
+  install.packages(unlist(new.packages))
+}
+
 # load packages
 library(raster)
 library(rgdal)
