@@ -494,13 +494,6 @@ extracted_heights = data.frame(id=buffered_plots$id, extracted_heights)
 # merge infos from Plots (e.g. Plot-id) with extracted height value table
 extracted_heights = as.data.frame(merge(buffered_plots, extracted_heights, by="id"))
 
-# convert height values to cm and print them
-extracted_heights$mean_height = extracted_heights$mean_height * 100
-extracted_heights$median_height = extracted_heights$median_height * 100
-extracted_heights$SD_height = extracted_heights$SD_height * 100
-extracted_heights$MAD_height = extracted_heights$MAD_height * 100
-extracted_heights$percentile.90. = extracted_heights$percentile.90. * 100
-
 # merge height values with lodging values in final table
 colnames(extracted_heights)[2] = "Plot"
 colnames(height_information)[2] = "Plot"
