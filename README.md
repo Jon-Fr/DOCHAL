@@ -2,7 +2,6 @@
 
 This is an R script that can be used to derive crop heights and lodging areas from point clouds or digital elevation models.
 &nbsp;
-
 &nbsp;
 
 Required input datasets are:
