@@ -1,5 +1,6 @@
-### Script for extracting vegetation heights and lodging areas from 3D point clouds or digital elevation models ###
-###################################################################################################################
+### Script for extracting vegetation heights and lodging areas from 3D point clouds or digital elevation models of agricultural plots ###
+### Authors: Markus Adam, Felix Bachmann, Jonathan Frank                                                                              ###
+#########################################################################################################################################
 
 # list required packages
 packages = list("raster", "rgdal", "rgeos", "lidR", "openxlsx")
@@ -384,7 +385,7 @@ if(nrow(class_df) == 3) {
   color = color[1:nrow(class_df)]
 }
 
-#add extra space to the right of the plot
+# add extra space to the right of the plot
 par(mar=c(4, 3, 3, 7), xpd=TRUE)
 
 # plot classified CHM
@@ -474,7 +475,7 @@ if (buffer_setting == "y"){
   buffered_plots = manual_buffer(plot_boundaries, buffer_width)
 }
 
-# overlay height and lodging rasters and se lodging areas to NA
+# overlay height and lodging rasters and set lodging areas to NA
 masked_clipped_CHM = overlay(clipped_CHM, CHM_classified, fun = function(x,y){
   x[y<3] = NA
   return(x)
@@ -504,7 +505,7 @@ extracted_values = merge(extracted_values_temp, height_information[, c("Plot", "
                          by = "Plot", all.x=TRUE)
 
 
-# merge extract value df with plot SPDF and export it as SHP
+# merge extracted value df with plot SPDF and export it as SHP
 extracted_values = extracted_values[,c(2,1,3:ncol(extracted_values))]
 colnames(extracted_values)[1] = "ID"
 colnames(extracted_values)[2] = "Parzelle"
