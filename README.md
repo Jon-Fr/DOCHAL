@@ -1,13 +1,13 @@
 # DOCHAL (determination of crop height and lodging)
 
-This is an R script that can be used to derive crop heights and lodging areas from point clouds or digital elevation models.
+This is an R script that can be used to derive crop heights and lodging areas from point clouds or digital elevation models of agricultural plots.
 &nbsp;
 
 &nbsp;
 
 Required input datasets are:
 * terrain height information (as point cloud (.laz) or DTM (.tif))
-* crop surface information (as point cloud ((.laz) or DSM (.tif))
+* crop surface information (as point cloud (.laz) or DSM (.tif))
 * Shapefile with plot boundaries
 * (optional) Shapefile with region of interest   
 
