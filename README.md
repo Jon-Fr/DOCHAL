@@ -1,7 +1,6 @@
 # DOCHAL (determination of crop height and lodging)
 
 This is an R script that can be used to derive crop heights and lodging areas from point clouds or digital elevation models of agricultural plots.
-&nbsp;
 
 &nbsp;
 
