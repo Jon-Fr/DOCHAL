@@ -47,7 +47,6 @@ The meaning of the columns in the output table is as follows (height values in m
 | upper | height threshold between the classes "probably not lodging" and "most likely not lodging"|
 | min_angle | minimum lodging angle that leads to classification as lodging|
  
-
 &nbsp;  
 
 The lodging/no-lodging classes are represented by the following values in the output classification raster:
